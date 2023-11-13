@@ -11,7 +11,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: gray;
+    background-color: white;
 }
 .btn_1{
     cursor: pointer;
@@ -26,11 +26,12 @@
     max-width: calc(2vw * 800px);
     border: none;
     border-radius: 50px;
-    background-color: wheat;
+    background-color: blue;
     text-transform: uppercase;
     font-weight: bold;
     /* font-size: 1.5rem; */
     font-size: clamp(1rem, 3vw, 2rem);
+    color: white;
 }
 #File_1{
     display: none;
