@@ -424,20 +424,18 @@ function OC_Proceed3_btn(){
             //Successful response
             Upload_status.classList.remove('Enable');
             const response = JSON.parse(xhr.responseText);
+            const Train_MLA = response.Train_MLA;
+            const Test_MLA = response.Test_MLA;
             
-            //WORKING LAST :
-            console.log(response);
-            
-
             const DataSplit_title = document.getElementById('DataSplit_title');
             const Train_status = document.getElementById('Train_status');
             const Test_status = document.getElementById('Test_status');
             const Proceed4 = document.getElementById('Proceed4');
 
             DataSplit_title.classList.add('Enable');
-            Train_status.textContent = `Train = (500, 6)`;
+            Train_status.textContent = `Train = (${Train_MLA})`;
             Train_status.classList.add('Enable');
-            Test_status.textContent = `Test = (600, 1)`;
+            Test_status.textContent = `Test = (${Test_MLA})`;
             Test_status.classList.add('Enable');
             Proceed4.classList.add('Enable');
         }else{
@@ -445,7 +443,6 @@ function OC_Proceed3_btn(){
             location.reload();
         }
     };
-    console.log(floatValue + " - " + intValue)
     const requestData = JSON.stringify({Filename: Sel_Filename, Dropdown_VN: Sel_TagetColName, TestSize: floatValue, RandomState: intValue});
     xhr.send(requestData);
 }

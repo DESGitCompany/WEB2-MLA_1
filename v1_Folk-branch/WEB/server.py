@@ -5,16 +5,13 @@ from zipfile import ZipFile
 import os, io
 from static.script.py.MLA_pandas import *
 
-#import pandas as pd
-#from sklearn.model_selection import train_test_split
-
 # INIT
 app = Flask(__name__, static_url_path='/static', static_folder='static')
 
 # SHIPPING MODE
-DEMO_MODE = True
-#app.config['ENV'] = 'production'
-#app.config['DEBUG'] = False
+DEMO_MODE = False
+app.config['ENV'] = 'production'
+app.config['DEBUG'] = False
 
 # VARIABLES
 FILE_LOC = '_UPLOADS/files'
@@ -118,23 +115,12 @@ def r_DATA2():
     df = read_data(SpreadSheet_path)
     x, y = independent_dependent(df, r_Dropdown_VN)
     
-    #print(r_TestSize)
-    #print(r_RandomState)
-    
-    
-    #X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=r_TestSize, shuffle=r_RandomState)
-    X_train, X_test, y_train, y_test = train_test_split1(x, y, r_TestSize, r_RandomState)
+    X_train, X_test, y_train, y_test = TrainTest_Split(x, y, r_TestSize, r_RandomState)
     
     Train_MLA = (len(X_train), len(y_train))
     Test_MLA = (len(X_test), len(y_test))
     
-    print(Train_MLA)
-    print(Test_MLA)
-    
-    return jsonify({'message': 'Data received successfully!'})
-    #return jsonify({'IndCol_list': IndCol_list, 'DepCol_list': DepCol_list})
-
-
+    return jsonify({'Train_MLA': Train_MLA, 'Test_MLA': Test_MLA})
 
 
 if __name__ == '__main__':
@@ -142,21 +128,3 @@ if __name__ == '__main__':
         app.run(debug=False, host='127.0.0.1', port=80)
     else:
         app.run(debug=True, host='127.0.0.1', port=80)
-
-
-#return jsonify({'message': 'Data received successfully!'})
-#TESTING...
-#from backup import read_data
-
-#THIS TO SEND DF OF SELECTED ROWS AND TITLE :
-# a = x.head()
-# b = y.head()
-
-#CHANGE ALL NA TO 0
-# a = a.fillna(0)
-# b = b.fillna(0)
-
-#MAKE THE DEFAULT DF TO DICT TO SEND IT TO JS (JSONIFY)
-# a = a.to_dict()
-# b = b.to_dict()
-#-->

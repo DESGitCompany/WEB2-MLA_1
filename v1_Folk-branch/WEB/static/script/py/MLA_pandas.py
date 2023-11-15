@@ -33,6 +33,6 @@ def independent_dependent(a,x):
   return X,y
 
 #Performing train test split // ( 0 < test_size <= 1 & 0 < random_state <= 100 ) | test_size - float | random_state - int
-def train_test_split1(x,y,test_size,random_state):
+def TrainTest_Split(x,y,test_size,random_state):
   X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=test_size, random_state=random_state)
   return X_train, X_test, y_train, y_test
