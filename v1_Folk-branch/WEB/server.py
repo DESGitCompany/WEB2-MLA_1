@@ -3,14 +3,15 @@
 from flask import Flask, render_template, request, jsonify
 from zipfile import ZipFile
 import os, io
+from static.script.py.MLA_pandas import *
 
 # INIT
 app = Flask(__name__, static_url_path='/static', static_folder='static')
 
 # SHIPPING MODE
-DEMO_MODE = False
-app.config['ENV'] = 'production'
-app.config['DEBUG'] = False
+DEMO_MODE = True
+#app.config['ENV'] = 'production'
+#app.config['DEBUG'] = False
 
 # VARIABLES
 FILE_LOC = '_UPLOADS/files'
@@ -25,25 +26,27 @@ def index():
 # RECEIVING FILES
 @app.route('/_UPLOADS/files', methods=['POST'])
 def upload_file():
-    if 'file' not in request.files:
+    if 'files[]' not in request.files:
         return jsonify({'error': 'No file part'})
     
-    file = request.files['file']
-    if file.filename == '':
-        return jsonify({'error': 'No selected file'})
-    
-    file_size = os.fstat(file.stream.fileno()).st_size
-    if file_size > MAX_FILE_SIZE_BYTES:
+    files = request.files.getlist('files[]')
+
+    files_size = sum(os.fstat(file.stream.fileno()).st_size for file in files)
+    if files_size > MAX_FILE_SIZE_BYTES:
         #err_msg = ('File size (' + str(file_size / (1024 * 1024)) + ') exceeds the maximum allowed limit (' + str(MAX_FILE_SIZE_BYTES / (1024 * 1024)) + ' MB)')
         return jsonify({'error': 'File size exceeds the maximum allowed limit. (50 MB)'})
     
-    # DIR LOCATION FOR FILE SAVE
-    upload_dir = os.path.join(os.getcwd(), FILE_LOC)
-    # upload_dir = os.path.join(os.getcwd(), '_UPLOADS/files')
-    if not os.path.exists(upload_dir):
-        os.makedirs(upload_dir)
+    for file in files:
+        if file.filename == '':
+            return jsonify({'error': 'No selected file'})
         
-    file.save(os.path.join(upload_dir, file.filename))
+        # DIR LOCATION FOR FILE SAVE
+        upload_dir = os.path.join(os.getcwd(), FILE_LOC)
+        # upload_dir = os.path.join(os.getcwd(), '_UPLOADS/files')
+        if not os.path.exists(upload_dir):
+            os.makedirs(upload_dir)
+            
+        file.save(os.path.join(upload_dir, file.filename))
     return jsonify({'message': 'File uploaded successfully'})
     
 # RECEIVING FOLDERS
@@ -73,9 +76,83 @@ def upload_folder():
             
         return jsonify({'success': True, 'target_directory': target_directory})
     return jsonify({'error': 'Unknown error'})    
+
+# RECEIVING FILE NAME (READ DATA & SEND COLUMN NAMES...)
+@app.route('/_UPLOADS/spreadsheet', methods=['POST'])
+def r_DATA():
+    data = request.get_json()
+    r_Filename = data.get('Filename')
     
+    SpreadSheet_path = './_UPLOADS/files/' + r_Filename
+    df = read_data(SpreadSheet_path)
+    df_col = display_columns_names(df)
+    
+    return jsonify({'df_col': df_col})
+
+# RECEIVING FILE NAME & COLUMN NAMES (READ DATA & SEND INDEPENDENT & DEPENDENT ROWS...)
+@app.route('/_UPLOADS/spreadsheet1', methods=['POST'])
+def r_DATA1():
+    data = request.get_json()
+    r_Filename = data.get('Filename')
+    r_Dropdown_VN = data.get('Dropdown_VN')
+    
+    SpreadSheet_path = './_UPLOADS/files/' + r_Filename
+    df = read_data(SpreadSheet_path)
+    IndCol_list, DepCol_list = Ind_Dep_title(df, r_Dropdown_VN)
+    
+    return jsonify({'IndCol_list': IndCol_list, 'DepCol_list': DepCol_list})
+
+# RECEIVING FILE NAME & COLUMN NAMES (TRAINING & TESTING...)
+@app.route('/_UPLOADS/spreadsheet2', methods=['POST'])
+def r_DATA2():
+    data = request.get_json()
+    r_Filename = data.get('Filename')
+    r_Dropdown_VN = data.get('Dropdown_VN')
+    r_TestSize = data.get('TestSize')
+    r_RandomState = data.get('RandomState')
+    
+    SpreadSheet_path = './_UPLOADS/files/' + r_Filename
+    df = read_data(SpreadSheet_path)
+    x, y = independent_dependent(df, r_Dropdown_VN)
+    
+    print(r_TestSize)
+    print(r_RandomState)
+    
+    #X_train, X_test, y_train, y_test = train_test_split(x, y, r_TestSize, r_RandomState)
+    
+    
+    #Train_MLA = (len(X_train), len(y_train))
+    #Test_MLA = (len(X_test), len(y_test))
+    
+    #print(Train_MLA)
+    #print(Test_MLA)
+    
+    return jsonify({'message': 'Data received successfully!'})
+    #return jsonify({'IndCol_list': IndCol_list, 'DepCol_list': DepCol_list})
+
+
+
+
 if __name__ == '__main__':
     if not DEMO_MODE:
-        app.run(host='127.0.0.1', port=80)
+        app.run(debug=False, host='127.0.0.1', port=80)
     else:
-        app.run(debug=True)
+        app.run(debug=True, host='127.0.0.1', port=80)
+
+
+#return jsonify({'message': 'Data received successfully!'})
+#TESTING...
+#from backup import read_data
+
+#THIS TO SEND DF OF SELECTED ROWS AND TITLE :
+# a = x.head()
+# b = y.head()
+
+#CHANGE ALL NA TO 0
+# a = a.fillna(0)
+# b = b.fillna(0)
+
+#MAKE THE DEFAULT DF TO DICT TO SEND IT TO JS (JSONIFY)
+# a = a.to_dict()
+# b = b.to_dict()
+#-->

@@ -1,6 +1,8 @@
 # This .gitignore file should be placed at the root of your Unity project directory
 
 /_INSTRUCTION/
-/main-branch/
+/main-branch/_INFO
+/main-branch/manager
 /v1_Folk-branch/_INFO
 /v1_Folk-branch/WEB/requirements_FULL.txt
+/v1_Folk-branch/WEB/static/script/py/__pycache__

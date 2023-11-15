@@ -4,31 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DREAD EYE STUDIO | UD</title>
-
-    <link rel="icon" href="{{ url_for('static', filename='')}}" type="image/x-icon">
+    <!---------------------------- ONLY FOR FLASK ---------------------------->
+    <link rel="icon" href="{{ url_for('static', filename='img/ico/eg.ico')}}" type="image/x-icon">
 
     <!-- LOADING - CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='script/css/style.css')}}">
     <!-- LOADING - JS -->
     <script src="{{ url_for('static', filename='script/js/export/jszip.min.js')}}"></script>
     <script src="{{ url_for('static', filename='script/js/script.js')}}" defer></script>
+    <!---------------------------- ONLY FOR FLASK ---------------------------->
 </head>
 <body>
     <header></header>
     <section>
-        <div class="bt_cover">
-            <button id="btn1_1" class="btn_1 Enable_Btn">SELECT</button>
-            <button id="btn2_1" class="btn_1">Select (Folder)</button>
-            <button id="btn3_1" class="btn_1">Select (File)</button>
+        <div class="Content">
+            <form id="FormCover" class="FormCover Enable_FormCover"  enctype="multipart/form-data">
+                <!-- 1,2 -->
+                <span id="Upload_status" class="Upload_status">No File/Folder Chosen!</span>
+                
+                <label for="FileUpload" id="FileUpload_btn" class="Btn Enable"><span id="FileUpload_txt" class="FileUpload_txt">File Upload</span></label>
+                <input id="FileUpload" type="file">
 
-            <form id="CF_Cover" class="CF_Cover" enctype="multipart/form-data">
-                <span id="Status_FileText_1" class="Status_FileText">No File Chosen!</span>
-                <label for="File_1" id="Btn_File_1" class="btn_1">
-                    <span id="CF_label1_1" class="CF_label_1">Choose File</span>
-                </label>
-                <input id="File_1" type="file">
-                <input id="Submit_btn1_1" class="btn_1" type="button" value="UPLOAD"></input>
-                <!-- <input id="File_1" type="file" multiple> -->
+                <label for="FolderUpload" id="FolderUpload_btn" class="Btn Enable"><span id="FolderUpload_txt" class="FolderUpload_txt">Folder Upload</span></label>
+                <input id="FolderUpload" type="file">
+
+                <input id="Proceed" class="Btn" type="button" value="Proceed"></input>
+                
+                <!-- 3 -->
+                <span id="Spreadsheet_FN" class="Spreadsheet_FN">Example</span>
+                <span id="TagetCol_txt" class="TagetCol_txt">Select the target column</span>
+                
+                <select id="TagetCol_dropdown" class="Btn TagetCol_dropdown"><option value="select">Select</option></select>
+                <input id="Proceed1" class="Btn" type="button" value="Proceed"></input>
+
+                <!-- 4 -->
+                <div id="TableStyle_wrap" class="TableStyle_wrap">
+                    <div class="TableStyle_parant">
+                        <table id="IndTable" border="20">
+                            <thead>
+                            <tr>
+                                <th class="TableStyle">Independent Columns</th>
+                            </tr>
+                            </thead>
+                            <tbody id="IndCol_table" class="TableStyle"></tbody>
+                        </table>
+                        <table id="DepTable" border="20">
+                            <thead>
+                            <tr>
+                                <th class="TableStyle">Dependent Columns</th>
+                            </tr>
+                            </thead>
+                            <tbody id="DepCol_table" class="TableStyle"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <input id="Proceed2" class="Btn" type="button" value="Proceed"></input>
+
+                <!-- 5 -->
+                <span id="DataSplit_title" class="Spreadsheet_FN">Data Split</span>
+
+                <label for="TestSize_float" id="TestSize_input" class="TagetCol_txt">Test Size:</label>
+                <input type="text" id="TestSize_float" class="Btn TagetCol_dropdown" placeholder="Enter Test Size" oninput="TestSize_VF(this)">
+                <p id="floatError" class="InputError" style="color: red;"></p>
+
+                <label for="Shuffle_int" id="Shuffle_input" class="TagetCol_txt">Shuffle:</label>
+                <input type="text" id="Shuffle_int" class="Btn TagetCol_dropdown" placeholder="Enter Shuffle" oninput="Shuffle_VI(this)">
+                <p id="intError" class="InputError" style="color: red;"></p>
+                
+                <input id="Proceed3" class="Btn" type="button" value="Proceed"></input>
+
+                <!-- 6, NEXT -->
+                <span id="DataSplit_title" class="Spreadsheet_FN">Size</span>
+
+                <span id="Train_status" class="TagetCol_txt">No File/Folder Chosen!</span>
+                <span id="Test_status" class="TagetCol_txt">No File/Folder Chosen!</span>
+
+                <input id="Proceed4" class="Btn" type="button" value="Proceed"></input>
             </form>
         </div>
     </section>

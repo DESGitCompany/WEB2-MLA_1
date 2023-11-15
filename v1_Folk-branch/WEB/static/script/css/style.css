@@ -5,17 +5,34 @@
     box-sizing: border-box;
     font-family: Verdana, Tahoma, serif, sans-serif;
 }
+div{
+    white-space: pre-wrap;
+}
 
-.bt_cover{
+.Content{
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: white;
 }
-.btn_1{
+.FormCover{
+    display: none;
+    align-items: center;
+    flex-direction: column;  
+}
+.Enable_FormCover{
+    display: flex;
+    width: 80%;
+    min-width: calc(2vw * 300px);
+    max-width: calc(2vw * 800px);
+}
+
+
+.Btn{
     cursor: pointer;
     display: none;
+    margin-top: 10px;
     margin-left: 10px;
     margin-right: 10px;
     padding: 20px;
@@ -33,40 +50,89 @@
     font-size: clamp(1rem, 3vw, 2rem);
     color: white;
 }
-#File_1{
+#FileUpload, #FolderUpload{
     display: none;
-}
-.Enable_Btn{
-    display: block;
 }
 
-.CF_Cover{
-    display: none;
-    align-items: center;
-    flex-direction: column;  
-}
-.CF_Cover_Enable{
-    display: flex;
-    width: 80%;
-    min-width: calc(2vw * 300px);
-    max-width: calc(2vw * 800px);
-}
-.CF_label_1{
+
+
+.FileUpload_txt, .FolderUpload_txt{
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.Status_FileText{
+.Upload_status, .Spreadsheet_FN{
+    display: none;
+    margin-bottom: 25px;
+    color: gray;
+    font-weight: bolder;
+    /* font-size: 1rem; */
+    font-size: clamp(0.5rem, 3vw, 1rem);
+    text-align: center;
+}
+#Proceed{
+    margin-top: 10px;
+}
+.TagetCol_dropdown{
     display: none;
     margin-bottom: 25px;
     color: white;
     font-weight: bolder;
     /* font-size: 1rem; */
+    font-size: clamp(1rem, 3vw, 2rem);
+    text-align: center;
+}
+
+
+.TableStyle_wrap{
+    display: none;
+}
+.TableStyle_parant{
+    display: flex;
+    gap: 20px;
+    margin: 20px;
+    text-align: center;
+}
+.TableStyle{
+    padding: 20px;
+    font-size: clamp(1rem, 3vw, 2rem);
+}
+tbody.TableStyle > tr > td{
+    padding: 8px;
+    font-size: clamp(1rem, 3vw, 2rem);
+}
+
+.Spreadsheet_FN{
+    display: none;
+    margin-bottom: 200px;
+    color: black;
+    font-weight: bolder;
+    /* font-size: 1rem; */
+    font-size: clamp(2rem, 3vw, 4rem);
+    text-align: center;
+    text-transform: uppercase;
+}
+.TagetCol_txt{
+    display: none;
+    margin-bottom: 25px;
+    color: black;
+    font-weight: bolder;
+    /* font-size: 1rem; */
+    font-size: clamp(1rem, 3vw, 2rem);
+    text-align: center;
+    text-transform: uppercase;
+}
+.InputError{
+    display: none;
+    /* margin-top: 25px; */
+    margin-bottom: 25px;
+    color: black;
+    font-weight: bolder;
+    /* font-size: 1rem; */
     font-size: clamp(0.5rem, 3vw, 1rem);
+    text-align: center;
 }
-.Enable_Status_FileText{
+
+.Enable{
     display: block;
-}
-#Submit_btn1_1{
-    margin-top: 10px;
 }
