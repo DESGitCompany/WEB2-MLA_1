@@ -5,6 +5,9 @@ from zipfile import ZipFile
 import os, io
 from static.script.py.MLA_pandas import *
 
+#import pandas as pd
+#from sklearn.model_selection import train_test_split
+
 # INIT
 app = Flask(__name__, static_url_path='/static', static_folder='static')
 
@@ -115,17 +118,18 @@ def r_DATA2():
     df = read_data(SpreadSheet_path)
     x, y = independent_dependent(df, r_Dropdown_VN)
     
-    print(r_TestSize)
-    print(r_RandomState)
-    
-    #X_train, X_test, y_train, y_test = train_test_split(x, y, r_TestSize, r_RandomState)
+    #print(r_TestSize)
+    #print(r_RandomState)
     
     
-    #Train_MLA = (len(X_train), len(y_train))
-    #Test_MLA = (len(X_test), len(y_test))
+    #X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=r_TestSize, shuffle=r_RandomState)
+    X_train, X_test, y_train, y_test = train_test_split1(x, y, r_TestSize, r_RandomState)
     
-    #print(Train_MLA)
-    #print(Test_MLA)
+    Train_MLA = (len(X_train), len(y_train))
+    Test_MLA = (len(X_test), len(y_test))
+    
+    print(Train_MLA)
+    print(Test_MLA)
     
     return jsonify({'message': 'Data received successfully!'})
     #return jsonify({'IndCol_list': IndCol_list, 'DepCol_list': DepCol_list})
