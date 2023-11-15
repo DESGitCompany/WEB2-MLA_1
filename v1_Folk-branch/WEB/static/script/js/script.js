@@ -435,9 +435,9 @@ function OC_Proceed3_btn(){
             const Proceed4 = document.getElementById('Proceed4');
 
             DataSplit_title.classList.add('Enable');
-            Train_status.textContent = 'Train = (500, 6)';
+            Train_status.textContent = `Train = (500, 6)`;
             Train_status.classList.add('Enable');
-            Test_status.textContent = '(600, 1)';
+            Test_status.textContent = `Test = (600, 1)`;
             Test_status.classList.add('Enable');
             Proceed4.classList.add('Enable');
         }else{
