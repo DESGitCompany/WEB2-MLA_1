@@ -22,6 +22,10 @@
                 <!-- 1,2 -->
                 <span id="Upload_status" class="Upload_status">No File/Folder Chosen!</span>
                 
+                <div id="progress-container" class="progress-container">
+                    <div id="progress-bar" class="progress-bar"></div>
+                </div>
+
                 <label for="FileUpload" id="FileUpload_btn" class="Btn Enable"><span id="FileUpload_txt" class="FileUpload_txt">File Upload</span></label>
                 <input id="FileUpload" type="file">
 
@@ -30,6 +34,8 @@
 
                 <input id="Proceed" class="Btn" type="button" value="Proceed"></input>
                 
+                
+
                 <!-- 3 -->
                 <span id="Spreadsheet_FN" class="Spreadsheet_FN">Example</span>
                 <span id="TagetCol_txt" class="TagetCol_txt">Select the target column</span>
@@ -46,7 +52,7 @@
                                 <th class="TableStyle">Independent Columns</th>
                             </tr>
                             </thead>
-                            <tbody id="IndCol_table" class="TableStyle"></tbody>
+                            <tbody id="IndCol_table" class="TableStyle tbody1"></tbody>
                         </table>
                         <table id="DepTable" border="20">
                             <thead>
@@ -54,7 +60,7 @@
                                 <th class="TableStyle">Dependent Columns</th>
                             </tr>
                             </thead>
-                            <tbody id="DepCol_table" class="TableStyle"></tbody>
+                            <tbody id="DepCol_table" class="TableStyle tbody1"></tbody>
                         </table>
                     </div>
                 </div>

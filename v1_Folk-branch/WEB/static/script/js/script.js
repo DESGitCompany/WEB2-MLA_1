@@ -99,11 +99,31 @@ function SendUpdate(RAW_DATA_Upload, FileName_multi, Upload_status){
             var xhr = new XMLHttpRequest();
             xhr.open('POST', '/_UPLOADS/files', true)
             
+            //TRACK BEFORE DOWNLOAD STARTS
+            xhr.addEventListener('loadstart', function(){
+                const progressBar = document.getElementById('progress-bar');
+                progressBar.style.width = 0;
+                const progressContainer = document.getElementById('progress-container');
+                progressContainer.classList.add('Enable');
+            });
+
+            //TRACK DOWNLOAD PROGRESS WITH PROGRESS BAR
+            xhr.upload.addEventListener('progress', function (e) {
+                const progressBar = document.getElementById('progress-bar');
+                var percent = (e.loaded / e.total) * 100;
+                progressBar.style.width = percent + '%';
+            });
+
             xhr.onreadystatechange = function (){
                 if(xhr.readyState === 4 && xhr.status === 200){
                     //Successful response
                     //var response = JSON.parse(xhr.responseText);
                     //console.log('Success:', response);
+                    const progressContainer = document.getElementById('progress-container');
+                    progressContainer.classList.remove('Enable');
+                    const progressBar = document.getElementById('progress-bar');
+                    progressBar.style.width = 0;
+
                     Upload_status.textContent = `File Successfully Uploaded!\n(File: ${FileName_multi})`;
                     SendUpdateCompleted_Callback();
                 }else if(xhr.readyState === 4 && xhr.status !== 200){
@@ -153,8 +173,18 @@ function SendUpdate(RAW_DATA_Upload, FileName_multi, Upload_status){
                 }
             }
 
+            const progressBar = document.getElementById('progress-bar');
+            progressBar.style.width = 0;
+            const progressContainer = document.getElementById('progress-container');
+            progressContainer.classList.add('Enable');
+
             addFilesToZip(DATA_Upload).then(() => {
-                zip.generateAsync({ type: 'blob'}).then(function (content) {
+                zip.generateAsync({ type: 'blob' }, function (metadata){
+                    //console.log("!");
+                    const progressBar = document.getElementById('progress-bar');
+                    const percent = metadata.percent || 0;
+                    progressBar.style.width = percent + '%';
+                }).then(function (content) {
                     const formData = new FormData();
                     const zipBlob = new Blob([content], {type: 'application/zip'});
                     formData.append('zipFile', zipBlob, 'archive.zip');
@@ -163,11 +193,31 @@ function SendUpdate(RAW_DATA_Upload, FileName_multi, Upload_status){
                     const xhr = new XMLHttpRequest();
                     xhr.open('POST', '/_UPLOADS/folders', true);
 
+                    //TRACK BEFORE DOWNLOAD STARTS
+                    xhr.addEventListener('loadstart', function(){
+                        const progressBar = document.getElementById('progress-bar');
+                        progressBar.style.width = 0;
+                        const progressContainer = document.getElementById('progress-container');
+                        progressContainer.classList.add('Enable');
+                    });
+
+                    //TRACK DOWNLOAD PROGRESS WITH PROGRESS BAR
+                    xhr.upload.addEventListener('progress', function (e) {
+                        const progressBar = document.getElementById('progress-bar');
+                        var percent = (e.loaded / e.total) * 100;
+                        progressBar.style.width = percent + '%';
+                    });
+
                     xhr.onreadystatechange = function() {
                         if(xhr.readyState === 4 && xhr.status === 200){
                             //Successful response
                             //var response = JSON.parse(xhr.responseText);
                             //console.log('Success:', response);
+                            const progressContainer = document.getElementById('progress-container');
+                            progressContainer.classList.remove('Enable');
+                            const progressBar = document.getElementById('progress-bar');
+                            progressBar.style.width = 0;
+
                             var RelativePath_Folder = DATA_Upload[0].webkitRelativePath.split("/");
                             Upload_status.textContent = `Folder Successfully Uploaded!\nFolder: ${RelativePath_Folder[0]}`;
                             SendUpdateCompleted_Callback();

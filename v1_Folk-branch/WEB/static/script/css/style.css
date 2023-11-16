@@ -92,14 +92,27 @@ div{
     gap: 20px;
     margin: 20px;
     text-align: center;
+
+    /* min-width: 200px; */
+    max-width: 700px;
+    overflow-x: auto;
 }
 .TableStyle{
     padding: 20px;
     font-size: clamp(1rem, 3vw, 2rem);
 }
 tbody.TableStyle > tr > td{
+    margin: 0;
     padding: 8px;
     font-size: clamp(1rem, 3vw, 2rem);
+    /* background-color: #4caf50; */
+    width: 10%;
+}
+.tbody1{
+    display: block;
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 0;
 }
 
 .Spreadsheet_FN{
@@ -132,6 +145,27 @@ tbody.TableStyle > tr > td{
     font-size: clamp(0.5rem, 3vw, 1rem);
     text-align: center;
 }
+
+.progress-container {
+    display: none;
+    margin-top: 10px;
+    width: 100%;
+    height: 20px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 5px solid black;
+    background-color: black;
+}
+.progress-bar {
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    position: absolute;
+    background-color: #4caf50;
+}
+
 
 .Enable{
     display: block;
