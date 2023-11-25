@@ -4,9 +4,9 @@ from flask import Flask, render_template, request, jsonify
 app = Flask(__name__, static_url_path='/static', static_folder='static')
 
 # SHIPPING MODE
-DEMO_MODE = True
-#app.config['ENV'] = 'production'
-#app.config['DEBUG'] = False
+DEMO_MODE = False
+app.config['ENV'] = 'production'
+app.config['DEBUG'] = False
 
 # RUNNING HTML CODE (index.html)
 @app.route('/')
