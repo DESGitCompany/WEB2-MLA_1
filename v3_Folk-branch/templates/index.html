@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- APACHE WEB SERVER! -->
+    <!---------------------------- ONLY APACHE SERVER ---------------------------->
+    <!-- LOADING - CSS -->
+    <!-- <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/ext/style.css">
+    <link rel="stylesheet" type="text/css" href="./css/ext/litegraph.css">
+    <link rel="stylesheet" type="text/css" href="./css/ext/litegraph-editor.css"> -->
+    <!-- LOADING - JS -->
+    <!-- <script src="./js/a.js" defer></script>
+    <script type="text/javascript" src="./js/ext/litegraph.js" defer></script>
+    <script type="text/javascript" src="./js/ext/litegraph-editor.js" defer></script>
+    <script type="text/javascript" src="./js/ext/defaults.js" defer></script>
+    <script src="./js/int.js" defer></script>
+    <script type="text/javascript" src="./js/ext/nodes/base.js" defer></script>
+    <script type="text/javascript" src="./js/ext/nodes/logic.js" defer></script>
+    <script type="text/javascript" src="./js/ext/nodes/events.js" defer></script>
+    <script type="text/javascript" src="./js/ext/nodes/math.js" defer></script>
+    <script type="text/javascript" src="./js/ext/nodes/math3d.js" defer></script>
+    <script type="text/javascript" src="./js/ext/nodes/strings.js" defer></script>
+    <script type="text/javascript" src="./js/ext/nodes/interface.js" defer></script>
+    <script type="text/javascript" src="./js/ext/nodes/geometry.js" defer></script>
+    <script type="text/javascript" src="./js/ext/nodes/graphics.js" defer></script>
+    <script type="text/javascript" src="./js/ext/nodes/input.js" defer></script>
+    <script type="text/javascript" src="./js/ext/nodes/midi.js" defer></script>
+    <script type="text/javascript" src="./js/ext/nodes/audio.js" defer></script>
+    <script type="text/javascript" src="./js/ext/nodes/network.js" defer></script>
+    <script type="text/javascript" src="./js/ext/nodes/demos.js" defer></script>
+    <script type="text/javascript" src="./js/ext/code.js" defer></script> -->
+    <!---------------------------- ONLY APACHE SERVER ---------------------------->
+
+
+    <!---------------------------- ONLY FLASK SERVER ---------------------------->
+    <!-- LOADING - CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/script/css/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/script/css/ext/style.css')}}.">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/script/css/ext/litegraph.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/script/css/ext/litegraph-editor.css')}}">
+    <!-- LOADING - JS -->
+    <script type="text/javascript" src="{{ url_for('static', filename='/script/js/a.js')}}" defer></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='/script/js/ext/litegraph.js')}}" defer></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='/script/js/ext/litegraph-editor.js')}}" defer></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='/script/js/ext/defaults.js')}}" defer></script>
+    <script src="{{ url_for('static', filename='/script/js/int.js')}}" defer></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='/script/js/ext/nodes/base.js')}}" defer></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='/script/js/ext/nodes/logic.js')}}" defer></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='/script/js/ext/nodes/events.js')}}" defer></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='/script/js/ext/nodes/math.js')}}" defer></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='/script/js/ext/nodes/math3d.js')}}" defer></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='/script/js/ext/nodes/strings.js')}}" defer></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='/script/js/ext/nodes/interface.js')}}" defer></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='/script/js/ext/nodes/geometry.js')}}" defer></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='/script/js/ext/nodes/graphics.js')}}" defer></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='/script/js/ext/nodes/input.js')}}" defer></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='/script/js/ext/nodes/midi.js')}}" defer></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='/script/js/ext/nodes/audio.js')}}" defer></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='/script/js/ext/nodes/network.js')}}" defer></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='/script/js/ext/nodes/demos.js')}}" defer></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='/script/js/ext/code.js')}}" defer></script>
+    <!---------------------------- ONLY FOR FLASK ---------------------------->
+</head>
+<body>
+    <div id="main">
+    </div>
+</body>
+</html>
